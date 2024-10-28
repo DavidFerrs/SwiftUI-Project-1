@@ -21,6 +21,14 @@ struct TextFieldView: View {
         
         return checkAmount / 100 * tipSelection
     }
+    
+    var isTipZero: Bool {
+        if tipPercentage == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
         
     var totalPerPerson: Double {
         let peopleCount = Double(numberOfPeople + 2)
@@ -64,6 +72,7 @@ struct TextFieldView: View {
                 
                 Section("Total amount plus tip") {
                     Text("\(checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD")) + \(tipValue, format: .currency(code: Locale.current.currency?.identifier ?? "USD")) = \(checkAmount + tipValue, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
+                        .foregroundStyle(isTipZero ? .red : .primary)
                 }
                 
             }
